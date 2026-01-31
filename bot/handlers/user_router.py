@@ -89,23 +89,12 @@ async def back_to_main_menu(callback: CallbackQuery, state: FSMContext):
 
 @router.callback_query(F.data == "about_me")
 async def about_me(callback: CallbackQuery):
-    from aiogram.types import InputMediaPhoto
-    
-    # Сначала отправляем текст
+    # Отправляем всё в одном сообщении
     await callback.message.answer(
         ABOUT_TEXT,
-        parse_mode="HTML"
+        parse_mode="HTML",
+        reply_markup=inline.back_to_menu()
     )
-    
-    # Затем отправляем две фотографии-заглушки с кнопкой под ними
-    media = [
-        InputMediaPhoto(media="https://placehold.co/600x400/2563eb/ffffff.png?text=Фото+1"),
-        InputMediaPhoto(media="https://placehold.co/600x400/16a34a/ffffff.png?text=Фото+2")
-    ]
-    await callback.message.answer_media_group(media=media)
-    
-    # Кнопка "Главное меню" отдельным сообщением
-    await callback.message.answer("⬇️", reply_markup=inline.back_to_menu())
     await callback.answer()
 
 # Текст FAQ - можно отредактировать
