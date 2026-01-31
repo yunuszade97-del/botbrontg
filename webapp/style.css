@@ -4,7 +4,7 @@
     --text-color: var(--tg-theme-text-color, #ffffff);
     --hint-color: var(--tg-theme-hint-color, #aaaaaa);
     --link-color: var(--tg-theme-link-color, #6c5ce7);
-    --button-color: var(--tg-theme-button-color, #6c5ce7);
+    --button-color: var(--tg-theme-button-color, #4A90D9);
     --button-text-color: var(--tg-theme-button-text-color, #ffffff);
     --secondary-bg: var(--tg-theme-secondary-bg-color, #16213e);
 }
@@ -35,35 +35,65 @@ body {
     position: relative;
 }
 
-.container {
-    max-width: 400px;
+/* Dashboard Container */
+.dashboard {
+    max-width: 420px;
     margin: 0 auto;
     position: relative;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Glass Card - Universal Style */
+.glass-card {
     background: rgba(26, 26, 46, 0.85);
-    backdrop-filter: blur(10px);
-    border-radius: 24px;
-    padding: 24px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-h1 {
-    font-size: 1.4rem;
-    text-align: center;
-    margin-bottom: 24px;
+/* Card Header */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.card-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.card-header h2 {
+    font-size: 1.2rem;
     font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
 }
 
-label {
+/* Card Text */
+.card-text {
+    font-size: 0.95rem;
+    color: var(--hint-color);
+    line-height: 1.6;
+}
+
+/* Calendar Section */
+.calendar-section {
+    margin-top: 8px;
+}
+
+.calendar-section label {
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--hint-color);
     margin-bottom: 8px;
-}
-
-/* Calendar Input */
-.calendar-section {
-    margin-bottom: 20px;
 }
 
 #datepicker {
@@ -72,27 +102,39 @@ label {
     font-size: 1rem;
     border: none;
     border-radius: 12px;
-    background-color: var(--secondary-bg);
+    background-color: rgba(255, 255, 255, 0.08);
     color: var(--text-color);
     cursor: pointer;
     text-align: center;
+    transition: all 0.2s ease;
+}
+
+#datepicker:hover {
+    background-color: rgba(255, 255, 255, 0.12);
 }
 
 #datepicker:focus {
     outline: 2px solid var(--button-color);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Time Slots */
+/* Time Section */
 .time-section {
-    margin-bottom: 20px;
+    margin-top: 16px;
     animation: fadeIn 0.3s ease;
+}
+
+.time-section label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--hint-color);
+    margin-bottom: 10px;
 }
 
 .time-slots {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    margin-top: 10px;
 }
 
 .time-slot {
@@ -100,7 +142,7 @@ label {
     text-align: center;
     border: none;
     border-radius: 10px;
-    background-color: var(--secondary-bg);
+    background-color: rgba(255, 255, 255, 0.08);
     color: var(--text-color);
     font-size: 0.95rem;
     cursor: pointer;
@@ -126,22 +168,23 @@ label {
 
 /* Selected Info */
 .selected-info {
-    background-color: var(--secondary-bg);
-    padding: 16px;
+    background-color: rgba(74, 144, 217, 0.15);
+    padding: 14px;
     border-radius: 12px;
-    margin-bottom: 20px;
+    margin-top: 16px;
     text-align: center;
+    border: 1px solid rgba(74, 144, 217, 0.3);
     animation: fadeIn 0.3s ease;
 }
 
 .selected-info p {
     color: var(--hint-color);
     font-size: 0.85rem;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .selection-display {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--button-color);
 }
@@ -150,12 +193,13 @@ label {
 .confirm-btn {
     width: 100%;
     padding: 16px;
+    margin-top: 16px;
     font-size: 1rem;
     font-weight: 600;
     border: none;
     border-radius: 12px;
-    background-color: var(--button-color);
-    color: var(--button-text-color);
+    background: linear-gradient(135deg, #4A90D9 0%, #6c5ce7 100%);
+    color: white;
     cursor: pointer;
     transition: all 0.2s ease;
     animation: fadeIn 0.3s ease;
@@ -164,6 +208,7 @@ label {
 .confirm-btn:hover {
     opacity: 0.9;
     transform: scale(1.01);
+    box-shadow: 0 4px 20px rgba(74, 144, 217, 0.4);
 }
 
 .confirm-btn:active {
@@ -172,10 +217,11 @@ label {
 
 /* Flatpickr Customization */
 .flatpickr-calendar {
-    background: var(--secondary-bg) !important;
-    border: none !important;
-    border-radius: 12px !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+    background: rgba(22, 33, 62, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
 }
 
 .flatpickr-day {
@@ -230,98 +276,15 @@ label {
     }
 }
 
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
+/* Stagger animation for cards */
+.glass-card:nth-child(1) {
+    animation: fadeIn 0.4s ease 0.1s both;
 }
 
-/* SPA Navigation */
-.container.hidden {
-    display: none;
+.glass-card:nth-child(2) {
+    animation: fadeIn 0.4s ease 0.2s both;
 }
 
-.container.fade-in {
-    animation: fadeIn 0.3s ease forwards;
-}
-
-.container.fade-out {
-    animation: fadeOut 0.3s ease forwards;
-}
-
-/* About Me Button */
-.about-btn {
-    width: 100%;
-    padding: 14px;
-    font-size: 1rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #4A90D9 0%, #6c5ce7 100%);
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
-}
-
-.about-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 20px rgba(74, 144, 217, 0.4);
-}
-
-.about-btn:active {
-    transform: scale(0.98);
-}
-
-/* Back Button */
-.back-btn {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--text-color);
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-bottom: 20px;
-}
-
-.back-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-/* About View Content */
-.about-content {
-    text-align: center;
-}
-
-.about-text {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--button-color);
-    margin-bottom: 20px;
-    padding: 20px;
-    background: rgba(108, 92, 231, 0.1);
-    border-radius: 16px;
-    border: 1px solid rgba(108, 92, 231, 0.3);
-}
-
-.about-details {
-    font-size: 1rem;
-    color: var(--hint-color);
-    line-height: 1.6;
-    padding: 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-}
-
-.about-details p {
-    margin: 0;
+.glass-card:nth-child(3) {
+    animation: fadeIn 0.4s ease 0.3s both;
 }

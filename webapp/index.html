@@ -20,54 +20,60 @@
     <!-- Shader Background -->
     <canvas id="shader-bg"></canvas>
 
-    <!-- Main View (Calendar/Booking) -->
-    <div class="container" id="main-view">
-        <!-- About Me Button - First Element -->
-        <button class="about-btn" id="about-btn">
-            👤 Обо мне
-        </button>
+    <!-- Main Dashboard -->
+    <div class="dashboard">
 
-        <h1>📅 Выберите дату и время</h1>
-
-        <div class="calendar-section">
-            <label for="datepicker">Дата:</label>
-            <input type="text" id="datepicker" placeholder="Выберите дату" readonly>
-        </div>
-
-        <div class="time-section" id="time-section" style="display: none;">
-            <label>Доступное время:</label>
-            <div class="time-slots" id="time-slots">
-                <!-- Time slots will be inserted here -->
+        <!-- Card 1: About Me -->
+        <div class="glass-card">
+            <div class="card-header">
+                <span class="card-icon">👤</span>
+                <h2>Обо мне</h2>
             </div>
-        </div>
-
-        <div class="selected-info" id="selected-info" style="display: none;">
-            <p>Вы выбрали:</p>
-            <div class="selection-display" id="selection-display"></div>
-        </div>
-
-        <button class="confirm-btn" id="confirm-btn" style="display: none;">
-            ✅ Подтвердить запись
-        </button>
-    </div>
-
-    <!-- About View -->
-    <div class="container hidden" id="about-view">
-        <button class="back-btn" id="back-btn">
-            ← Назад
-        </button>
-
-        <h1>👤 Обо мне</h1>
-
-        <div class="about-content">
-            <p class="about-text">
-                Ваш текст, что угодно.
+            <p class="card-text">
+                Ваш текст, что угодно. Здесь вы можете добавить информацию о себе, своём опыте и подходе к работе.
             </p>
-
-            <div class="about-details">
-                <p>Здесь вы можете добавить любую информацию о себе, своих услугах, достижениях и опыте работы.</p>
-            </div>
         </div>
+
+        <!-- Card 2: My Specialty (NEW) -->
+        <div class="glass-card">
+            <div class="card-header">
+                <span class="card-icon">🧠</span>
+                <h2>Моя специальность</h2>
+            </div>
+            <p class="card-text">
+                Здесь описание вашей специализации, методы работы и ключевые компетенции.
+            </p>
+        </div>
+
+        <!-- Card 3: Booking Calendar -->
+        <div class="glass-card">
+            <div class="card-header">
+                <span class="card-icon">📅</span>
+                <h2>Выберите дату и время</h2>
+            </div>
+
+            <div class="calendar-section">
+                <label for="datepicker">Дата:</label>
+                <input type="text" id="datepicker" placeholder="Выберите дату" readonly>
+            </div>
+
+            <div class="time-section" id="time-section" style="display: none;">
+                <label>Доступное время:</label>
+                <div class="time-slots" id="time-slots">
+                    <!-- Time slots will be inserted here -->
+                </div>
+            </div>
+
+            <div class="selected-info" id="selected-info" style="display: none;">
+                <p>Вы выбрали:</p>
+                <div class="selection-display" id="selection-display"></div>
+            </div>
+
+            <button class="confirm-btn" id="confirm-btn" style="display: none;">
+                ✅ Подтвердить запись
+            </button>
+        </div>
+
     </div>
 
     <script src="shader.js"></script>
