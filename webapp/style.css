@@ -229,3 +229,99 @@ label {
         transform: translateY(0);
     }
 }
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* SPA Navigation */
+.container.hidden {
+    display: none;
+}
+
+.container.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.container.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+}
+
+/* About Me Button */
+.about-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #4A90D9 0%, #6c5ce7 100%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.about-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(74, 144, 217, 0.4);
+}
+
+.about-btn:active {
+    transform: scale(0.98);
+}
+
+/* Back Button */
+.back-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* About View Content */
+.about-content {
+    text-align: center;
+}
+
+.about-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--button-color);
+    margin-bottom: 20px;
+    padding: 20px;
+    background: rgba(108, 92, 231, 0.1);
+    border-radius: 16px;
+    border: 1px solid rgba(108, 92, 231, 0.3);
+}
+
+.about-details {
+    font-size: 1rem;
+    color: var(--hint-color);
+    line-height: 1.6;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.about-details p {
+    margin: 0;
+}

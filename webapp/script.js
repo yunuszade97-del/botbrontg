@@ -146,3 +146,65 @@ script.onload = function () {
     console.log('Flatpickr loaded');
 };
 document.head.appendChild(script);
+
+// ==========================================
+// SPA Navigation Logic
+// ==========================================
+
+// Navigate to About Me view
+function showAboutView() {
+    const mainView = document.getElementById('main-view');
+    const aboutView = document.getElementById('about-view');
+
+    // Fade out main view
+    mainView.classList.add('fade-out');
+
+    setTimeout(() => {
+        mainView.classList.add('hidden');
+        mainView.classList.remove('fade-out');
+
+        // Show about view with fade in
+        aboutView.classList.remove('hidden');
+        aboutView.classList.add('fade-in');
+
+        setTimeout(() => {
+            aboutView.classList.remove('fade-in');
+        }, 300);
+    }, 300);
+}
+
+// Navigate back to Main view
+function showMainView() {
+    const mainView = document.getElementById('main-view');
+    const aboutView = document.getElementById('about-view');
+
+    // Fade out about view
+    aboutView.classList.add('fade-out');
+
+    setTimeout(() => {
+        aboutView.classList.add('hidden');
+        aboutView.classList.remove('fade-out');
+
+        // Show main view with fade in
+        mainView.classList.remove('hidden');
+        mainView.classList.add('fade-in');
+
+        setTimeout(() => {
+            mainView.classList.remove('fade-in');
+        }, 300);
+    }, 300);
+}
+
+// Add event listeners for navigation when DOM is ready
+document.addEventListener('DOMContentLoaded', function () {
+    const aboutBtn = document.getElementById('about-btn');
+    const backBtn = document.getElementById('back-btn');
+
+    if (aboutBtn) {
+        aboutBtn.addEventListener('click', showAboutView);
+    }
+
+    if (backBtn) {
+        backBtn.addEventListener('click', showMainView);
+    }
+});

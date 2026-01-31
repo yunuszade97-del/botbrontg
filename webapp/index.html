@@ -20,7 +20,13 @@
     <!-- Shader Background -->
     <canvas id="shader-bg"></canvas>
 
-    <div class="container">
+    <!-- Main View (Calendar/Booking) -->
+    <div class="container" id="main-view">
+        <!-- About Me Button - First Element -->
+        <button class="about-btn" id="about-btn">
+            👤 Обо мне
+        </button>
+
         <h1>📅 Выберите дату и время</h1>
 
         <div class="calendar-section">
@@ -43,6 +49,25 @@
         <button class="confirm-btn" id="confirm-btn" style="display: none;">
             ✅ Подтвердить запись
         </button>
+    </div>
+
+    <!-- About View -->
+    <div class="container hidden" id="about-view">
+        <button class="back-btn" id="back-btn">
+            ← Назад
+        </button>
+
+        <h1>👤 Обо мне</h1>
+
+        <div class="about-content">
+            <p class="about-text">
+                Ваш текст, что угодно.
+            </p>
+
+            <div class="about-details">
+                <p>Здесь вы можете добавить любую информацию о себе, своих услугах, достижениях и опыте работы.</p>
+            </div>
+        </div>
     </div>
 
     <script src="shader.js"></script>
