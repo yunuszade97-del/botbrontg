@@ -1,6 +1,6 @@
 from aiogram import Router, F, Bot
 from aiogram.types import Message, CallbackQuery
-from aiogram.filters import CommandStart
+from aiogram.filters import CommandStart, Command
 from aiogram.fsm.context import FSMContext
 import json
 
@@ -10,6 +10,7 @@ from bot.states.states import Booking
 from bot.config import ADMIN_ID
 
 router = Router()
+
 
 # Обработчик данных из Web App календаря
 @router.message(F.web_app_data)
@@ -65,6 +66,35 @@ async def back_to_main_menu(callback: CallbackQuery, state: FSMContext):
         reply_markup=inline.main_menu()
     )
     await callback.answer()
+
+
+# Команда /book - Записаться на консультацию
+@router.message(Command("book"))
+async def cmd_book(message: Message):
+    """Открывает Web App для записи на консультацию"""
+    await message.answer(
+        "📅 Нажмите кнопку ниже, чтобы открыть календарь записи:",
+        reply_markup=inline.main_menu()
+    )
+
+
+# Команда /help - Помощь
+@router.message(Command("help"))
+async def cmd_help(message: Message):
+    """Показывает справочную информацию"""
+    help_text = (
+        "🆘 <b>Справка по боту</b>\n\n"
+        "📅 <b>Записаться на консультацию:</b>\n"
+        "Нажмите кнопку «Записаться» и выберите удобную дату и время.\n\n"
+        "💳 <b>Оплата:</b>\n"
+        "После выбора времени вы получите реквизиты для оплаты. "
+        "Отправьте скриншот оплаты для подтверждения записи.\n\n"
+        "🔄 <b>Отмена/Перенос:</b>\n"
+        "Свяжитесь минимум за 24 часа до консультации.\n\n"
+        "📞 <b>Вопросы:</b>\n"
+        "По всем вопросам пишите в личные сообщения."
+    )
+    await message.answer(help_text, parse_mode="HTML", reply_markup=inline.back_to_menu())
 
 @router.callback_query(F.data == "book_consultation")
 async def book_consultation(callback: CallbackQuery):
