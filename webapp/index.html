@@ -21,7 +21,7 @@
     <canvas id="shader-bg"></canvas>
 
     <!-- Main Dashboard -->
-    <div class="dashboard">
+    <div class="dashboard" id="main-view">
 
         <!-- Card 1: About Me -->
         <div class="glass-card">
@@ -34,7 +34,7 @@
             </p>
         </div>
 
-        <!-- Card 2: My Specialty (NEW) -->
+        <!-- Card 2: My Specialty -->
         <div class="glass-card">
             <div class="card-header">
                 <span class="card-icon">🧠</span>
@@ -59,9 +59,7 @@
 
             <div class="time-section" id="time-section" style="display: none;">
                 <label>Доступное время:</label>
-                <div class="time-slots" id="time-slots">
-                    <!-- Time slots will be inserted here -->
-                </div>
+                <div class="time-slots" id="time-slots"></div>
             </div>
 
             <div class="selected-info" id="selected-info" style="display: none;">
@@ -71,6 +69,49 @@
 
             <button class="confirm-btn" id="confirm-btn" style="display: none;">
                 ✅ Подтвердить запись
+            </button>
+        </div>
+
+        <!-- Card 4: AI Assistant -->
+        <div class="glass-card ai-card" id="ai-card">
+            <div class="card-header">
+                <span class="card-icon">🤖</span>
+                <h2>AI Помощник</h2>
+            </div>
+            <p class="card-text">
+                Задайте вопрос нашему умному ассистенту — он поможет с вопросами о консультациях.
+            </p>
+            <button class="chat-open-btn" id="open-chat-btn">
+                💬 Открыть чат
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Chat View (Hidden by default) -->
+    <div class="chat-container hidden" id="chat-view">
+
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <button class="back-btn" id="chat-back-btn">← Назад</button>
+            <h2>🤖 Чат с помощником</h2>
+        </div>
+
+        <!-- Chat Messages Area -->
+        <div class="chat-messages" id="chat-messages">
+            <!-- Welcome message -->
+            <div class="message message-ai">
+                <div class="message-content">
+                    Привет! 👋 Я ваш AI-помощник. Задайте мне любой вопрос о консультациях, записи или услугах.
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input Area -->
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Введите сообщение..." autocomplete="off">
+            <button class="send-btn" id="send-btn">
+                ➤
             </button>
         </div>
 
