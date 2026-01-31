@@ -66,10 +66,7 @@ async def cmd_start(message: Message):
     await rq.add_user(message.from_user.id, message.from_user.username, message.from_user.full_name)
     await message.answer_photo(
         photo="https://placehold.co/800x500/FF5733/ffffff.png?text=Добро+пожаловать!",
-        caption="Добро пожаловать! Я консультирую только ОНЛАЙН.\n"
-                "Платформа: Google Meet\n"
-                "Стоимость: 5000₽\n"
-                "Чтобы записаться, нажмите кнопку ниже.",
+        caption="Шафуля, мы можем добавить в бот, что угодно, какие еще мысли?",
         reply_markup=inline.main_menu()
     )
 
@@ -79,10 +76,7 @@ async def back_to_main_menu(callback: CallbackQuery, state: FSMContext):
     await state.clear()
     await callback.message.answer_photo(
         photo="https://placehold.co/800x500/FF5733/ffffff.png?text=Добро+пожаловать!",
-        caption="Добро пожаловать! Я консультирую только ОНЛАЙН.\n"
-                "Платформа: Google Meet\n"
-                "Стоимость: 5000₽\n"
-                "Чтобы записаться, нажмите кнопку ниже.",
+        caption="Шафуля, мы можем добавить в бот, что угодно, какие еще мысли?",
         reply_markup=inline.main_menu()
     )
     await callback.answer()
