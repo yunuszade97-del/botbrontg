@@ -1,12 +1,12 @@
 /* Telegram Theme Variables */
 :root {
-    --bg-color: var(--tg-theme-bg-color, #1a1a2e);
+    --bg-color: var(--tg-theme-bg-color, #0d1117);
     --text-color: var(--tg-theme-text-color, #ffffff);
-    --hint-color: var(--tg-theme-hint-color, #aaaaaa);
-    --link-color: var(--tg-theme-link-color, #6c5ce7);
+    --hint-color: var(--tg-theme-hint-color, #8b949e);
+    --link-color: var(--tg-theme-link-color, #58a6ff);
     --button-color: var(--tg-theme-button-color, #4A90D9);
     --button-text-color: var(--tg-theme-button-text-color, #ffffff);
-    --secondary-bg: var(--tg-theme-secondary-bg-color, #16213e);
+    --secondary-bg: var(--tg-theme-secondary-bg-color, #161b22);
 }
 
 * {
@@ -15,14 +15,15 @@
     box-sizing: border-box;
 }
 
-/* Shader Background Canvas */
+/* Shader Background Canvas - FIXED Z-INDEX */
 #shader-bg {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: -1;
+    /* Behind everything */
     pointer-events: none;
 }
 
@@ -33,28 +34,35 @@ body {
     min-height: 100vh;
     padding: 16px;
     position: relative;
+    z-index: 1;
 }
 
-/* Dashboard Container */
+/* Dashboard Container - EXPLICIT VISIBILITY */
 .dashboard {
     max-width: 420px;
     margin: 0 auto;
     position: relative;
     z-index: 10;
+    /* Definitely above background */
     display: flex;
     flex-direction: column;
     gap: 16px;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
-/* Glass Card - Universal Style */
+/* Glass Card - VISIBLE Background */
 .glass-card {
-    background: rgba(26, 26, 46, 0.85);
+    background: rgba(22, 27, 34, 0.92);
+    /* Nearly opaque - definitely visible */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 20px;
     padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 11;
 }
 
 /* Card Header */
@@ -102,7 +110,7 @@ body {
     font-size: 1rem;
     border: none;
     border-radius: 12px;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.1);
     color: var(--text-color);
     cursor: pointer;
     text-align: center;
@@ -110,12 +118,12 @@ body {
 }
 
 #datepicker:hover {
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 #datepicker:focus {
     outline: 2px solid var(--button-color);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.12);
 }
 
 /* Time Section */
@@ -142,7 +150,7 @@ body {
     text-align: center;
     border: none;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.1);
     color: var(--text-color);
     font-size: 0.95rem;
     cursor: pointer;
@@ -168,12 +176,12 @@ body {
 
 /* Selected Info */
 .selected-info {
-    background-color: rgba(74, 144, 217, 0.15);
+    background-color: rgba(74, 144, 217, 0.2);
     padding: 14px;
     border-radius: 12px;
     margin-top: 16px;
     text-align: center;
-    border: 1px solid rgba(74, 144, 217, 0.3);
+    border: 1px solid rgba(74, 144, 217, 0.4);
     animation: fadeIn 0.3s ease;
 }
 
@@ -217,11 +225,12 @@ body {
 
 /* Flatpickr Customization */
 .flatpickr-calendar {
-    background: rgba(22, 33, 62, 0.95) !important;
+    background: rgba(22, 27, 34, 0.98) !important;
     backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: 16px !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+    z-index: 9999 !important;
 }
 
 .flatpickr-day {
