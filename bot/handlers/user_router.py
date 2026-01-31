@@ -50,8 +50,8 @@ async def handle_webapp_data(message: Message, state: FSMContext, bot: Bot):
 @router.message(CommandStart())
 async def cmd_start(message: Message):
     await rq.add_user(message.from_user.id, message.from_user.username, message.from_user.full_name)
-    await message.answer_photo(
-        photo="https://placehold.co/800x500/4A90D9/ffffff.png?text=Медицинские+консультации",
+    await message.answer_animation(
+        animation="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
         caption="Шафуля, мы можем добавить в бот, что угодно, какие еще мысли?",
         reply_markup=inline.main_menu()
     )
@@ -59,8 +59,8 @@ async def cmd_start(message: Message):
 @router.callback_query(F.data == "main_menu")
 async def back_to_main_menu(callback: CallbackQuery, state: FSMContext):
     await state.clear()
-    await callback.message.answer_photo(
-        photo="https://placehold.co/800x500/4A90D9/ffffff.png?text=Медицинские+консультации",
+    await callback.message.answer_animation(
+        animation="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
         caption="Шафуля, мы можем добавить в бот, что угодно, какие еще мысли?",
         reply_markup=inline.main_menu()
     )

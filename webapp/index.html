@@ -1,45 +1,52 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Запись на консультацию</title>
-    
+
     <!-- Telegram Web App Script -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    
+
     <!-- Flatpickr Calendar -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <!-- Shader Background -->
+    <canvas id="shader-bg"></canvas>
+
     <div class="container">
         <h1>📅 Выберите дату и время</h1>
-        
+
         <div class="calendar-section">
             <label for="datepicker">Дата:</label>
             <input type="text" id="datepicker" placeholder="Выберите дату" readonly>
         </div>
-        
+
         <div class="time-section" id="time-section" style="display: none;">
             <label>Доступное время:</label>
             <div class="time-slots" id="time-slots">
                 <!-- Time slots will be inserted here -->
             </div>
         </div>
-        
+
         <div class="selected-info" id="selected-info" style="display: none;">
             <p>Вы выбрали:</p>
             <div class="selection-display" id="selection-display"></div>
         </div>
-        
+
         <button class="confirm-btn" id="confirm-btn" style="display: none;">
             ✅ Подтвердить запись
         </button>
     </div>
-    
+
+    <script src="shader.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
