@@ -11,8 +11,6 @@ def main_menu():
         text="📅 Записаться на консультацию", 
         web_app=WebAppInfo(url=WEBAPP_URL)
     )
-    kb.button(text="👤 Обо мне", callback_data="about_me")
-    kb.button(text="❓ Часто задаваемые вопросы", callback_data="faq")
     kb.button(text="🌐 Перейти на сайт", url="https://qr.yapomogu.pro/?doctor_id=627955&clinic_token=$2y$10$R9/Ai87oBXywtpRb.gVn6.jDFjk0zW1TO.5jFVzEo5rJHqcLGJtGm")
     kb.adjust(1)  # По одной кнопке в ряд
     return kb.as_markup()

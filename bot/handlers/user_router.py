@@ -47,20 +47,6 @@ async def handle_webapp_data(message: Message, state: FSMContext, bot: Bot):
         print(f"WebApp error: {e}")
         await message.answer("❌ Произошла ошибка. Попробуйте ещё раз.")
 
-# Текст "Обо мне" - можно отредактировать
-ABOUT_TEXT = """👤 <b>Обо мне</b>
-
-Я — профессиональный консультант с многолетним опытом работы.
-
-🎓 Образование: [Ваше образование]
-💼 Опыт: [Ваш опыт]
-🏆 Достижения: [Ваши достижения]
-
-📍 Работаю только онлайн через Google Meet.
-💰 Стоимость консультации: 5000₽
-
-По всем вопросам пишите в личные сообщения."""
-
 @router.message(CommandStart())
 async def cmd_start(message: Message):
     await rq.add_user(message.from_user.id, message.from_user.username, message.from_user.full_name)
@@ -72,7 +58,6 @@ async def cmd_start(message: Message):
 
 @router.callback_query(F.data == "main_menu")
 async def back_to_main_menu(callback: CallbackQuery, state: FSMContext):
-    # Очищаем состояние если было
     await state.clear()
     await callback.message.answer_photo(
         photo="https://placehold.co/800x500/FF5733/ffffff.png?text=Добро+пожаловать!",
@@ -80,44 +65,6 @@ async def back_to_main_menu(callback: CallbackQuery, state: FSMContext):
         reply_markup=inline.main_menu()
     )
     await callback.answer()
-
-@router.callback_query(F.data == "about_me")
-async def about_me(callback: CallbackQuery):
-    # Отправляем всё в одном сообщении
-    await callback.message.answer(
-        ABOUT_TEXT,
-        parse_mode="HTML",
-        reply_markup=inline.back_to_menu()
-    )
-    await callback.answer()
-
-# Текст FAQ - можно отредактировать
-FAQ_TEXT = """❓ <b>Часто задаваемые вопросы</b>
-
-<b>1. Как проходит консультация?</b>
-Консультация проходит онлайн через Google Meet. Вы получите ссылку после подтверждения записи.
-
-<b>2. Сколько длится консультация?</b>
-Стандартная консультация длится 60 минут.
-
-<b>3. Как оплатить?</b>
-После выбора времени вы получите реквизиты для оплаты. Отправьте скриншот — и запись будет подтверждена.
-
-<b>4. Можно ли перенести запись?</b>
-Да, свяжитесь со мной минимум за 24 часа до консультации.
-
-<b>5. Что если у меня проблемы с подключением?</b>
-Напишите мне — мы решим вопрос или перенесём встречу."""
-
-@router.callback_query(F.data == "faq")
-async def faq(callback: CallbackQuery):
-    await callback.message.answer(
-        FAQ_TEXT,
-        parse_mode="HTML",
-        reply_markup=inline.back_to_menu()
-    )
-    await callback.answer()
-
 
 @router.callback_query(F.data == "book_consultation")
 async def book_consultation(callback: CallbackQuery):
