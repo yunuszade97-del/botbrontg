@@ -1,9 +1,16 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+
+# URL для Web App календаря (замените на свой GitHub Pages URL после деплоя)
+WEBAPP_URL = "https://yunuszade97-del.github.io/botbrontg/webapp/"
 
 def main_menu():
     kb = InlineKeyboardBuilder()
-    kb.button(text="📅 Записаться на консультацию", callback_data="book_consultation")
+    # Кнопка с Web App для записи
+    kb.button(
+        text="📅 Записаться на консультацию", 
+        web_app=WebAppInfo(url=WEBAPP_URL)
+    )
     kb.button(text="👤 Обо мне", callback_data="about_me")
     kb.button(text="❓ Часто задаваемые вопросы", callback_data="faq")
     kb.button(text="🌐 Перейти на сайт", url="https://qr.yapomogu.pro/?doctor_id=627955&clinic_token=$2y$10$R9/Ai87oBXywtpRb.gVn6.jDFjk0zW1TO.5jFVzEo5rJHqcLGJtGm")

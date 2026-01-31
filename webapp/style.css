@@ -1,0 +1,210 @@
+/* Telegram Theme Variables */
+:root {
+    --bg-color: var(--tg-theme-bg-color, #1a1a2e);
+    --text-color: var(--tg-theme-text-color, #ffffff);
+    --hint-color: var(--tg-theme-hint-color, #aaaaaa);
+    --link-color: var(--tg-theme-link-color, #6c5ce7);
+    --button-color: var(--tg-theme-button-color, #6c5ce7);
+    --button-text-color: var(--tg-theme-button-text-color, #ffffff);
+    --secondary-bg: var(--tg-theme-secondary-bg-color, #16213e);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    padding: 16px;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--hint-color);
+    margin-bottom: 8px;
+}
+
+/* Calendar Input */
+.calendar-section {
+    margin-bottom: 20px;
+}
+
+#datepicker {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    text-align: center;
+}
+
+#datepicker:focus {
+    outline: 2px solid var(--button-color);
+}
+
+/* Time Slots */
+.time-section {
+    margin-bottom: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.time-slot {
+    padding: 12px 8px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.time-slot:hover {
+    background-color: var(--button-color);
+    transform: scale(1.02);
+}
+
+.time-slot.selected {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    font-weight: 600;
+}
+
+.time-slot.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Selected Info */
+.selected-info {
+    background-color: var(--secondary-bg);
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.selected-info p {
+    color: var(--hint-color);
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+.selection-display {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--button-color);
+}
+
+/* Confirm Button */
+.confirm-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    animation: fadeIn 0.3s ease;
+}
+
+.confirm-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.01);
+}
+
+.confirm-btn:active {
+    transform: scale(0.98);
+}
+
+/* Flatpickr Customization */
+.flatpickr-calendar {
+    background: var(--secondary-bg) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+.flatpickr-day {
+    color: var(--text-color) !important;
+    border-radius: 8px !important;
+}
+
+.flatpickr-day:hover {
+    background: var(--button-color) !important;
+    border-color: var(--button-color) !important;
+}
+
+.flatpickr-day.selected {
+    background: var(--button-color) !important;
+    border-color: var(--button-color) !important;
+}
+
+.flatpickr-day.disabled {
+    color: var(--hint-color) !important;
+    opacity: 0.3;
+}
+
+.flatpickr-months .flatpickr-month {
+    background: transparent !important;
+    color: var(--text-color) !important;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    background: var(--secondary-bg) !important;
+    color: var(--text-color) !important;
+}
+
+.flatpickr-weekday {
+    color: var(--hint-color) !important;
+}
+
+.flatpickr-prev-month, .flatpickr-next-month {
+    fill: var(--text-color) !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

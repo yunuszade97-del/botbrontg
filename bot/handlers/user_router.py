@@ -2,6 +2,7 @@ from aiogram import Router, F, Bot
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
+import json
 
 from bot.database import requests as rq
 from bot.keyboards import inline
@@ -9,6 +10,42 @@ from bot.states.states import Booking
 from bot.config import ADMIN_ID
 
 router = Router()
+
+# Обработчик данных из Web App календаря
+@router.message(F.web_app_data)
+async def handle_webapp_data(message: Message, state: FSMContext, bot: Bot):
+    """Обрабатывает данные из Web App календаря"""
+    try:
+        # Парсим JSON данные от Web App
+        data = json.loads(message.web_app_data.data)
+        selected_date = data.get("date")  # Формат: DD.MM.YYYY
+        selected_time = data.get("time")  # Формат: HH:MM
+        
+        if not selected_date or not selected_time:
+            await message.answer("❌ Ошибка: не удалось получить дату и время.")
+            return
+        
+        # Сохраняем в FSM состояние
+        await state.update_data(
+            webapp_date=selected_date,
+            webapp_time=selected_time
+        )
+        await state.set_state(Booking.payment)
+        
+        # Просим оплату
+        await message.answer(
+            f"📅 Вы выбрали: <b>{selected_date} в {selected_time}</b>\n\n"
+            "💳 Оплатите консультацию по ссылке: [Ссылка на оплату]\n\n"
+            "📸 После оплаты отправьте скриншот для подтверждения.",
+            parse_mode="HTML",
+            reply_markup=inline.back_to_menu()
+        )
+        
+    except json.JSONDecodeError:
+        await message.answer("❌ Ошибка при обработке данных.")
+    except Exception as e:
+        print(f"WebApp error: {e}")
+        await message.answer("❌ Произошла ошибка. Попробуйте ещё раз.")
 
 # Текст "Обо мне" - можно отредактировать
 ABOUT_TEXT = """👤 <b>Обо мне</b>
@@ -128,15 +165,33 @@ async def select_slot(callback: CallbackQuery, state: FSMContext):
 @router.message(Booking.payment, F.photo)
 async def payment_proof(message: Message, state: FSMContext, bot: Bot):
     data = await state.get_data()
-    slot_id = data.get("slot_id")
-    slot = await rq.get_slot(slot_id)
     
-    if not slot or slot.is_booked:
-        await message.answer("Ошибка: этот слот больше недоступен.")
+    # Проверяем источник бронирования (WebApp или inline кнопки)
+    webapp_date = data.get("webapp_date")
+    webapp_time = data.get("webapp_time")
+    slot_id = data.get("slot_id")
+    
+    photo_id = message.photo[-1].file_id
+    
+    # Формируем информацию о слоте
+    if webapp_date and webapp_time:
+        # Бронирование через WebApp
+        slot_info = f"{webapp_date} в {webapp_time}"
+        # Для WebApp бронирований создаём временный идентификатор
+        booking_id = f"webapp_{message.from_user.id}_{webapp_date}_{webapp_time}"
+    elif slot_id:
+        # Бронирование через inline кнопки
+        slot = await rq.get_slot(slot_id)
+        if not slot or slot.is_booked:
+            await message.answer("Ошибка: этот слот больше недоступен.")
+            await state.clear()
+            return
+        slot_info = slot.time_value.strftime('%d.%m %H:%M')
+        booking_id = f"slot_{slot_id}"
+    else:
+        await message.answer("Ошибка: не найдена информация о бронировании.")
         await state.clear()
         return
-
-    photo_id = message.photo[-1].file_id
     
     # Уведомляем админа
     try:
@@ -145,9 +200,10 @@ async def payment_proof(message: Message, state: FSMContext, bot: Bot):
             photo=photo_id,
             caption=f"🆕 Новая заявка на бронирование!\n"
                     f"Пользователь: @{message.from_user.username} (ID: {message.from_user.id})\n"
-                    f"Слот: {slot.time_value.strftime('%d.%m %H:%M')}\n"
+                    f"Дата/время: {slot_info}\n"
+                    f"ID: {booking_id}\n"
                     f"Подтвердить?",
-            reply_markup=inline.admin_approval(slot_id, message.from_user.id)
+            reply_markup=inline.admin_approval(slot_id or 0, message.from_user.id)
         )
     except Exception as e:
         await message.answer("Ошибка при отправке админу. Попробуйте позже.")
